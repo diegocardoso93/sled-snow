@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://graphics/continue.png" type="Texture" id=3]
+[ext_resource path="res://graphics/stars0.png" type="Texture" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+func _ready():
+	var save_game = File.new()
+	if save_game.file_exists(\"user://savegame.save\"):
+		save_game.open(\"user://savegame.save\", File.READ)
+		var savedGame = save_game.get_var()
+		var status = savedGame.stages[savedGame.current-1].status
+		get_node(\"Stars\").texture = load(\"res://graphics/stars\"+str(status-1)+\".png\")
+		save_game.close()
+		save_game.open(\"user://savegame.save\", File.WRITE)
+		savedGame.stages[savedGame.current].status = 1
+		save_game.store_var(savedGame)
+		save_game.close()
+	pass
+"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends TextureButton
+
+func _on_click():
+
+	if Engine.has_singleton(\"GDUnityAds\"):
+		var Unityads = Engine.get_singleton(\"GDUnityAds\")
+		Unityads.show(\"video\")
+	
+
+	get_tree().change_scene(\"res://scenes/gamelobby.tscn\")
+"
+
+[node name="gameend" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 131073, 10, 0, 131079, 10, 0, 196611, 14, 0, 196612, 14, 0, 196613, 14, 0, 196614, 14, 0, 393217, 16, 0 )
+
+[node name="GoodWork" type="Label" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_top = 188.0
+margin_right = 593.0
+margin_bottom = 872.0
+size_flags_stretch_ratio = 0.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Good work! "
+align = 1
+valign = 1
+autowrap = true
+max_lines_visible = 4
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 180.0
+margin_top = 772.0
+margin_right = 441.0
+margin_bottom = 845.0
+texture_normal = ExtResource( 3 )
+script = SubResource( 2 )
+
+[node name="Stars" type="Sprite" parent="."]
+position = Vector2( 298.963, 611.287 )
+texture = ExtResource( 4 )
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_click"]

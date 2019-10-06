@@ -1,0 +1,182 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://graphics/start1.png" type="Texture" id=2]
+[ext_resource path="res://graphics/play_now.png" type="Texture" id=3]
+[ext_resource path="res://sounds/a_jinggle.wav" type="AudioStream" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+# Initial state
+var gameSave = {
+	\"current\": 0,
+	\"stages\": [
+		{\"status\": 1}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0},
+		{\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}, {\"status\": 0}
+	]
+}
+
+func _ready():
+	if Engine.has_singleton(\"GDUnityAds\"):
+		var Unityads = Engine.get_singleton(\"GDUnityAds\")
+		var _dict = Dictionary()
+		_dict[\"GameId\"] = \"2955403\"
+		Unityads.init(_dict, get_instance_id())
+
+	var save_game = File.new()
+	if save_game.file_exists(\"user://savegame.save\"):
+		return
+	save_game.open(\"user://savegame.save\", File.WRITE)
+	save_game.store_var(gameSave)
+	save_game.close()"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends TextureButton
+
+func _on_TextureButton_pressed():
+	get_tree().change_scene(\"res://scenes/gamelobby.tscn\")
+"
+
+[node name="gamestart" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 262145, 13, 0, 262150, 11, 0, 327681, 16, 0, 589827, 28, 0, 589830, 14, 0 )
+
+[node name="TileMap2" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 262145, 13, 0, 262150, 11, 0, 589827, 17, 0, 589830, 14, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 327.267, 492.849 )
+texture = ExtResource( 2 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 174.0
+margin_top = 731.0
+margin_right = 435.0
+margin_bottom = 804.0
+texture_normal = ExtResource( 3 )
+script = SubResource( 2 )
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_TextureButton_pressed"]

@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://graphics/isotiles.png" type="Texture" id=1]
+[ext_resource path="res://graphics/Isometric/treePineSnow_SE.png" type="Texture" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="base" type="Sprite" parent="."]
+position = Vector2( 150.049, 61.1264 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -66, -42 )
+region_enabled = true
+region_rect = Rect2( 28, 92, 132, 84 )
+
+[node name="wall" type="Sprite" parent="."]
+position = Vector2( 310, 180 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( 42.0001, -142 )
+region_enabled = true
+region_rect = Rect2( 28, 220, 132, 136 )
+
+[node name="wall2" type="Sprite" parent="."]
+position = Vector2( 164.311, 239.805 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -70, -100 )
+region_enabled = true
+region_rect = Rect2( 2, -14, 106, 200 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="wall2"]
+
+[node name="collision" type="CollisionPolygon2D" parent="wall2/StaticBody2D"]
+position = Vector2( -12.35, 68.4 )
+polygon = PoolVector2Array( -68, 2, -4, 34, 60, 2, -4, -30 )
+
+[node name="column" type="Sprite" parent="."]
+position = Vector2( 359.563, 266.446 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -69.5632, -100.446 )
+region_enabled = true
+region_rect = Rect2( 220, 220, 132, 136 )
+
+[node name="StaticBody" type="StaticBody2D" parent="column"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="column/StaticBody"]
+polygon = PoolVector2Array( -20, -6, -4, 10, 4, 10, 28, -6, 12, -22, -4, -22 )
+
+[node name="door1" type="Sprite" parent="."]
+position = Vector2( -24.1548, 142.216 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -50.3623, -90.8164 )
+region_enabled = true
+region_rect = Rect2( 24, 408, 132, 136 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="door1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="door1/StaticBody2D"]
+polygon = PoolVector2Array( -5.90501, 31.3748, 66.095, -0.62516, 50.095, -8.62516, -21.905, 23.3748 )
+

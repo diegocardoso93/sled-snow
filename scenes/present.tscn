@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://graphics/Isometric/present_NE.png" type="Texture" id=1]
+
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Area2D
+
+var _initial_pos
+
+func _ready():
+	set_physics_process(true)
+	_initial_pos = get_position()
+
+func _physics_process(delta):
+    set_position(_initial_pos)
+
+func _on_Area2D_body_entered(body):
+	body.collected(self)"
+
+[node name="present" type="Area2D"]
+position = Vector2( 365.448, 444.47 )
+script = SubResource( 1 )
+
+[node name="present2" type="Sprite" parent="." groups=[
+"present",
+]]
+position = Vector2( -0.465973, -6.22302 )
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 1.81171, 40.9326, 39.7383, 13.813, 3.03516, -5.1503, -35.7071, 13.813, -34.4802, 13.1795 )
+
+[connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]

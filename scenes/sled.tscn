@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/sled.gd" type="Script" id=1]
+[ext_resource path="res://sounds/a_pick.wav" type="AudioStream" id=2]
+[ext_resource path="res://sounds/a_death.wav" type="AudioStream" id=3]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/sled_NW.png-0923b4f8530e66ddbf8800fa489ce222.stex"
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 26.5935
+
+[node name="troll" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -3.94334, -36.924 )
+texture = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0353088, -26.184 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="SoundPick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="SoundDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
